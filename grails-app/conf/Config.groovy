@@ -102,6 +102,20 @@ log4j.main = {
     //appenders {
     //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
     //}
+    appenders {
+        appender new org.apache.log4j.RollingFileAppender(
+            name: 'application',
+            maxFileSize: '2MB',
+            maxBackupIndex: 10000,
+            file: "log/application.log",
+            layout:pattern(conversionPattern: '%d{DATE} %8X{memoryused} %5p %t %c{1}:%L %X{username} %X{request} - %m%n')
+        )
+    }
+
+    root {
+        debug 'application'
+        warn 'stdout'
+    }
 
     warn  'org.codehaus.groovy.grails.web.servlet',        // controllers
            'org.codehaus.groovy.grails.web.pages',          // GSP
